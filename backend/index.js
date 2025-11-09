@@ -1,11 +1,15 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes.js';
+
 
 const app = express();
 const PORT = 8080;
 
 // Middlewares
+dotenv.config();
 app.use(cors());
 app.use(express.json());
 
@@ -16,8 +20,12 @@ const dbURL = process.env.MONGO_ATLAS_URL
 // mongoDB setup
 async function main() {
     try {
-      await mongoose.connect(dbURL);
-      console.log("connection successful");
+      await mongoose.connect(dbURL, {
+        // name of DB
+        dbName: 'simple-intelligence'
+      });
+
+      console.log("DB connection successful!");
     } catch (err) {
       console.error("Error connecting to the database:", err);
     };
@@ -33,6 +41,9 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+
+// ================= Routes ====================
+app.use('/api/auth', authRoutes);
 
 // Start server
 app.listen(PORT, () => {
