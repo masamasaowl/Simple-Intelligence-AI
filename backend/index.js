@@ -45,6 +45,12 @@ app.get('/api/health', (req, res) => {
 // ================= Routes ====================
 app.use('/api/auth', authRoutes);
 
+//under dev
+// app.use('/api/conversations', conversationRoutes);
+
+
+
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
