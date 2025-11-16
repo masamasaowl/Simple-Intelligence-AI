@@ -1,10 +1,6 @@
 import Conversation from '../models/Conversation.js';
 import { aiService } from '../services/aiService.js';
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
-
 // let's go conventional!!
 
 

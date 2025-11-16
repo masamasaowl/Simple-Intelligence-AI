@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';
 import conversationRoutes from './routes/conversationRoutes.js';
 
-
 const app = express();
 const PORT = 8080;
 
@@ -45,14 +44,31 @@ app.get('/api/health', (req, res) => {
 
 // ================= Routes ====================
 app.use('/api/auth', authRoutes);
-
-//under dev
 app.use('/api/conversations', conversationRoutes);
 
 
 
+// ================== Errors ======================
 
-// Start server
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || 'Server Error'
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found'
+  });
+});
+
+
+// ==================== Start server =================
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

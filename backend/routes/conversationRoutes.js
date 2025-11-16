@@ -8,6 +8,14 @@ import {
 } from '../controllers/conversationController.js';
 import { protect } from '../middleware/auth.js';
 
+// implement ZOD
+import { validate } from '../middleware/validate.js';
+import {
+  createConversationSchema,
+  sendMessageSchema,
+} from '../validators/conversationValidator.js';
+
+
 const router = express.Router();
 
 // All routes require authentication
@@ -20,7 +28,7 @@ router.route('/')
   .get(getConversations)   
   
   // create new conversation @ POST /api/conversations
-  .post(createConversation); 
+  .post(validate(createConversationSchema),createConversation); 
 
 router.route('/:id')
 
@@ -32,6 +40,6 @@ router.route('/:id')
 
 
   // New message on by an user @ POST /api/conversations/:id/message
-router.post('/:id/message', sendMessage);  
+router.post('/:id/message',validate(sendMessageSchema), sendMessage);  
 
 export default router;
