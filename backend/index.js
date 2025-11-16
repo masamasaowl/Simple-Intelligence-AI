@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';
+import conversationRoutes from './routes/conversationRoutes.js';
 
 
 const app = express();
@@ -46,7 +47,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 
 //under dev
-// app.use('/api/conversations', conversationRoutes);
+app.use('/api/conversations', conversationRoutes);
 
 
 

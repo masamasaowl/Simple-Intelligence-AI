@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
+// this protect would be passed as a middleware directly in routes
 export const protect = async (req, res, next) => {
   try {
     let token;
