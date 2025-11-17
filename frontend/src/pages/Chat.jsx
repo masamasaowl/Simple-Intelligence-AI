@@ -1,3 +1,24 @@
+// Chat.jsx 
+// │
+// ├── Sidebar.jsx 
+// │   ├── Header
+// │   ├── New Chat Button
+// │   ├── Conversations List
+// │   └── User Info + Logout
+// │
+// └── ChatArea.jsx 
+//     ├── Header (Top)
+//     ├── MessageList.jsx (Middle)
+//     │   └── Message components
+//     └── ChatInput.jsx (Bottom)
+
+// OR
+
+// └── EmptyState.jsx (When no conversation)
+//     └── Welcome screen with features
+
+
+
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useConversationStore from '../store/conversationStore';
@@ -73,3 +94,5 @@ function Chat() {
 }
 
 export default Chat;
+
+
